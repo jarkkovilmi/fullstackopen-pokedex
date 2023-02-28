@@ -36,4 +36,5 @@ ENV PATH /root/.volta/bin:$PATH
 RUN apt-get update && apt-get install -y curl
 RUN chmod +x health_check.sh
 
+
 CMD [ "npm", "run", "start" ]
