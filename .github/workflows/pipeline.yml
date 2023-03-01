@@ -54,8 +54,6 @@ jobs:
           text: Build failed
           description: commit ${{ github.event.head_commit.url }} by ${{ github.actor }} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: url
-        run: echo "url ${{ github.event.commits.*.url }}"
           
   tag_release:
     needs: [simple_deployment_pipeline]
