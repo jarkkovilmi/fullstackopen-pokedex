@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - name: url
+        run: echo "url ${{ github.event.commits.*.url }}"
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -57,6 +63,10 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: url
         run: echo "url ${{ github.event.commits.*.url }}"
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
           
   tag_release:
     needs: [simple_deployment_pipeline]
