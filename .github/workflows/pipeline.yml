@@ -43,14 +43,17 @@ jobs:
         if: success()
         with:
           severity: info
+          text: A new version of Pokedex deployed
           details: Test Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Failure
+      - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          text: Build failed
+          description: commit
+          details: ${{ github.event.head_commit.url }} by ${{ github.actor }} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           
   tag_release:
